@@ -21,6 +21,7 @@ def extract_listingBanner(listing_soup):
         company_starRating = "NA"
         company_offeredRole = "NA"
         company_roleLocation = "NA"
+        estimated_salary = "NA"
     
     if listing_bannerGroup_valid:
         try:
@@ -50,7 +51,12 @@ def extract_listingBanner(listing_soup):
         except:
             company_roleLocation = "NA"
 
-    return companyName, company_starRating, company_offeredRole, company_roleLocation
+        try:
+            estimated_salary = listing_bannerGroup.find("div", class = "estimated salary range") #this might need to change
+        except:
+            estimated_salary = "NA"
+
+    return companyName, company_starRating, company_offeredRole, company_roleLocation, estimated_salary
 
 
 # extracts desired data from listing description
@@ -94,10 +100,10 @@ def extract_listing(url):
         return ("NA", "NA", "NA", "NA", "NA", "NA")
 
     if request_success:
-        companyName, company_starRating, company_offeredRole, company_roleLocation = extract_listingBanner(listing_soup)
+        companyName, company_starRating, company_offeredRole, company_roleLocation, estimated_salary = extract_listingBanner(listing_soup)
         listing_jobDesc = extract_listingDesc(listing_soup)
 
-        return (companyName, company_starRating, company_offeredRole, company_roleLocation, listing_jobDesc, requested_url)
+        return (companyName, company_starRating, company_offeredRole, company_roleLocation, listing_jobDesc, estimated_salary, requested_url)
 
 
 if __name__ == "__main__":
