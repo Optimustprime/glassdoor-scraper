@@ -1,5 +1,6 @@
 # Import necessary libraries
 # standard libraries
+import re
 from time import time
 # custom functions
 try:
@@ -52,7 +53,12 @@ def extract_listingBanner(listing_soup):
             company_roleLocation = "NA"
 
         try:
-            estimated_salary = listing_bannerGroup.find("div", class_="small css-10zcshf e1v3ed7e1").getText() #this might need to change
+            #use regex to find two ks separated by a hyphen and return that text
+            listing_text = listing_bannerGroup.get_text()
+            # Use regex to extract estimated salaries from the job description
+            pattern = r'\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s*K\s*-\s*\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s*K'
+            estimated_salary = re.find(pattern, listing_text)
+            
         except:
             estimated_salary = "NA"
 
