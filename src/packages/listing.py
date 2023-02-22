@@ -52,7 +52,7 @@ def extract_listingBanner(listing_soup):
             company_roleLocation = "NA"
 
         try:
-            estimated_salary = listing_bannerGroup.find("div", class = "estimated salary range") #this might need to change
+            estimated_salary = listing_bannerGroup.find("div", class = "small css-10zcshf e1v3ed7e1").getText() #this might need to change
         except:
             estimated_salary = "NA"
 
