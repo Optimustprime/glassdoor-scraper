@@ -26,7 +26,7 @@ def extract_listingBanner(listing_soup):
     
     if listing_bannerGroup_valid:
         listingBanner_text = listing_bannerGroup.getText()
-        with open("listing.txt", "w") as file:
+        with open("data/listing.txt", "w") as file:
             file.write(listingBanner_text)
 
         try:
@@ -60,7 +60,7 @@ def extract_listingBanner(listing_soup):
             estimated_salary = listing_bannerGroup.find("div", class_="small css-10zcshf e1v3ed7e1").getText()
         except:
             try:
-                estimated_salary = listing_bannerGroup.find("div", class_="css-1v5elnn e11nt52q2").getText()
+                estimated_salary = listing_bannerGroup.find_all("div", class_="css-1v5elnn e11nt52q2").getText()
             except:
                 try:
                     # Use regex to extract estimated salaries from the job description two ks separated by a hyphen and return that text
