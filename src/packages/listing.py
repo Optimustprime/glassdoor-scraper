@@ -28,7 +28,7 @@ def extract_listingBanner(listing_soup):
         listingBanner_text = listing_bannerGroup.getText()
         with open("listing.txt", "w") as file:
             file.write(listingBanner_text)
-            
+
         try:
             company_starRating = listing_bannerGroup.find("span", class_="css-1pmc6te e11nt52q4").getText()
         except:
@@ -55,16 +55,19 @@ def extract_listingBanner(listing_soup):
             company_roleLocation = listing_bannerGroup.find("div", class_="css-1v5elnn e11nt52q2").getText()
         except:
             company_roleLocation = "NA"
-
+        
         try:
-            #use regex to find two ks separated by a hyphen and return that text
-            listing_text = listing_bannerGroup.get_text()
-            # Use regex to extract estimated salaries from the job description
-            pattern = r'\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s*K\s*-\s*\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s*K'
-            estimated_salary = re.find(pattern, listing_text)
-            
+            estimated_salary = listing_bannerGroup.find("div", class_="small css-10zcshf e1v3ed7e1").getText()
         except:
-            estimated_salary = "NA"
+            try:
+                estimated_salary = listing_bannerGroup.find("div", class_="css-1v5elnn e11nt52q2").getText()
+            except:
+                try:
+                    # Use regex to extract estimated salaries from the job description two ks separated by a hyphen and return that text
+                    pattern = r'\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s*K\s*-\s*\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s*K'
+                    estimated_salary = re.find(pattern, listingBanner_text)   
+                except:
+                    estimated_salary = "NA"
 
     return companyName, company_starRating, company_offeredRole, company_roleLocation, estimated_salary
 
