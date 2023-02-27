@@ -2,6 +2,7 @@
 # standard libraries
 import re
 from time import time
+from datetime import datetime
 # custom functions
 try:
     from packages.common import requestAndParse
@@ -26,7 +27,10 @@ def extract_listingBanner(listing_soup):
     
     if listing_bannerGroup_valid:
         listingBanner_text = listing_bannerGroup.getText()
-        with open("data/listing.txt", "w") as file:
+
+        now = datetime.now() # current date and time
+        fileName = "/data/listing_" + now.strftime("%d-%m-%Y") + ".txt"
+        with open(fileName, "w") as file:
             file.write(listingBanner_text)
 
         try:
@@ -113,7 +117,7 @@ def extract_listing(url):
         request_success = True
     except Exception as e:
         print("[ERROR] Error occurred in extract_listing, requested url: {} is unavailable.".format(url))
-        return ("NA", "NA", "NA", "NA", "NA", "NA")
+        return ("NA", "NA", "NA", "NA", "NA", "NA", "NA")
 
     if request_success:
         companyName, company_starRating, company_offeredRole, company_roleLocation, estimated_salary = extract_listingBanner(listing_soup)
