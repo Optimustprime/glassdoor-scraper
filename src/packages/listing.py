@@ -1,6 +1,6 @@
 # Import necessary libraries
 # standard libraries
-import re
+import re, requests
 from time import time
 # custom functions
 try:
@@ -25,6 +25,10 @@ def extract_listingBanner(listing_soup):
         estimated_salary = "NA"
     
     if listing_bannerGroup_valid:
+        listingBanner_text = listing_bannerGroup.getText()
+        with open("listing.txt", "w") as file:
+            file.write(listingBanner_text)
+            
         try:
             company_starRating = listing_bannerGroup.find("span", class_="css-1pmc6te e11nt52q4").getText()
         except:
