@@ -28,10 +28,10 @@ def extract_listingBanner(listing_soup):
     if listing_bannerGroup_valid:
         listingBanner_text = listing_bannerGroup.getText()
 
-        now = datetime.now() # current date and time
-        fileName = "/data/listing_" + now.strftime("%d-%m-%Y") + ".txt"
-        with open(fileName, "w") as file:
-            file.write(listingBanner_text)
+        #now = datetime.now() # current date and time
+        #fileName = "/data/listing_" + now.strftime("%d-%m-%Y") + ".txt"
+        #with open(fileName, "w") as file:
+        #    file.write(listingBanner_text)
 
         try:
             company_starRating = listing_bannerGroup.find("span", class_="css-1pmc6te e11nt52q4").getText()
