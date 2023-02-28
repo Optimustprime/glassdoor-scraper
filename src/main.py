@@ -36,7 +36,7 @@ class glassdoor_scraper():
             os.makedirs('output')
         now = datetime.now() # current date and time
         output_fileName = "./output/output_" + now.strftime("%d-%m-%Y") + ".csv"
-        csv_header = [("companyName", "company_starRating", "company_offeredRole", "company_roleLocation", "listing_jobDesc", "estimated_salary", "requested_url")]
+        csv_header = [("companyName", "company_starRating", "company_offeredRole", "company_roleLocation", "listing_jobDesc", "estimated_salary", "requested_url", "Page_header_text")]
         self.fileWriter(listOfTuples=csv_header, output_fileName=output_fileName)
 
         maxJobs, maxPages = extract_maximums(base_url)
