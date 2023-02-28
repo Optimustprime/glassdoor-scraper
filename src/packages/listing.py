@@ -78,7 +78,7 @@ def extract_listingBanner(listing_soup):
                             #hardcoding the estimates out of the text
                             salary_pos = listingBanner_text.find('$')
                             if(salary_pos != -1):
-                                estimated_salary = listingBanner_text[salary_pos]
+                                estimated_salary = listingBanner_text[salary_pos::]
                             else:
                                 estimated_salary = "NA"
                         except:
