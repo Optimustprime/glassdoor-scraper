@@ -74,7 +74,15 @@ def extract_listingBanner(listing_soup):
                         pattern = r'\$.*'
                         estimated_salary = re.find(pattern, listingBanner_text)   
                     except:
-                        estimated_salary = "NA"
+                        try:
+                            #hardcoding the estimates out of the text
+                            salary_pos = listingBanner_text.find('$')
+                            if(salary_pos != -1):
+                                estimated_salary = listingBanner_text[salary_pos]
+                            else:
+                                estimated_salary = "NA"
+                        except:
+                            estimated_salary = "N/A"
 
     return companyName, company_starRating, company_offeredRole, company_roleLocation, estimated_salary, listingBanner_text
 
